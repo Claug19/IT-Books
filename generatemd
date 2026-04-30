@@ -1,6 +1,7 @@
 #!/bin/bash
 
 tree=$(tree -tf --noreport -I '*~|README.md|generatemd' --charset ascii $1 |
+       sed '1{/^\.$/d;}' |
        sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
 
 echo -e "# IT books repository\n\n\n### List of books:\n\n\n${tree}" > README.md
