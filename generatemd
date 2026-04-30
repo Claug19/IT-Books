@@ -2,6 +2,10 @@
 
 tree=$(tree -tf --noreport -I '*~|README.md|generatemd' --charset ascii $1 |
        sed '1{/^\.$/d;}' |
-       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
+       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g')
 
-echo -e "# IT books repository\n\n\n### List of books:\n\n\n${tree}" > README.md
+title="# IT books repository\n\n\n"
+about="### About:\nThis project contains IT books on various topics collected throughout the years.\n\n\n"
+books="### List of books:\n\n\n${tree}"
+
+echo -e "${title}${about}${books}" > README.md
