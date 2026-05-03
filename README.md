@@ -1,64 +1,81 @@
 # IT books repository
 
 
+
 ### About:
+
 This project contains IT books on various topics collected throughout the years.
+
 
 
 ### List of books:
 
 
- * [Artificial Intelligence](<./Artificial Intelligence>)
-   * [Artificial General Intelligence.pdf](<./Artificial Intelligence/Artificial General Intelligence.pdf>)
-   * [Artificial Intelligence - A Modern Approach.pdf](<./Artificial Intelligence/Artificial Intelligence - A Modern Approach.pdf>)
-   * [Artificial Intelligence - A Modern Approach, Second Edition.pdf](<./Artificial Intelligence/Artificial Intelligence - A Modern Approach, Second Edition.pdf>)
-   * [Artificial Intelligence - A Modern Approach, Third Edition.pdf](<./Artificial Intelligence/Artificial Intelligence - A Modern Approach, Third Edition.pdf>)
-   * [Artificial Intelligence for Games, Second Edition.pdf](<./Artificial Intelligence/Artificial Intelligence for Games, Second Edition.pdf>)
-   * [Artificial Intelligence - luger, Sixth Edition.pdf](<./Artificial Intelligence/Artificial Intelligence - luger, Sixth Edition.pdf>)
-   * [Universal Artificial Intelligence.pdf](<./Artificial Intelligence/Universal Artificial Intelligence.pdf>)
- * [Hardware](<./Hardware>)
-   * [Arduino](<./Hardware/Arduino>)
-     * [Arduino for Dummies.pdf](<./Hardware/Arduino/Arduino for Dummies.pdf>)
-     * [Arduino Projects for Dummies.pdf](<./Hardware/Arduino/Arduino Projects for Dummies.pdf>)
-     * [Arduino Sketches.pdf](<./Hardware/Arduino/Arduino Sketches.pdf>)
-     * [Exploring Arduino.pdf](<./Hardware/Arduino/Exploring Arduino.pdf>)
-     * [Introduction to Arduino.pdf](<./Hardware/Arduino/Introduction to Arduino.pdf>)
-   * [BeagleBone for Dummies.pdf](<./Hardware/BeagleBone for Dummies.pdf>)
-   * [Complete Electronics Self-teaching Guide with Projects.pdf](<./Hardware/Complete Electronics Self-teaching Guide with Projects.pdf>)
-   * [Electronics for Dummies.pdf](<./Hardware/Electronics for Dummies.pdf>)
-   * [Exploring BeagleBone.pdf](<./Hardware/Exploring BeagleBone.pdf>)
-   * [Raspberry Pi](<./Hardware/Raspberry Pi>)
-   * [Adventures in Raspberry Pi.pdf](<./Hardware/Raspberry Pi/Adventures in Raspberry Pi.pdf>)
-   * [Exploring Raspberry Pi.pdf](<./Hardware/Raspberry Pi/Exploring Raspberry Pi.pdf>)
-   * [Raspberry Pi Projects for Dummies.pdf](<./Hardware/Raspberry Pi/Raspberry Pi Projects for Dummies.pdf>)
-   * [Raspberry Pi Projects.pdf](<./Hardware/Raspberry Pi/Raspberry Pi Projects.pdf>)
-   * [Raspberry Pi User Guide.pdf](<./Hardware/Raspberry Pi/Raspberry Pi User Guide.pdf>)
- * [Networking](<./Networking>)
-   * [Cisco CCNA 200-301 Notes - Jeremys IT Lab.pdf](<./Networking/Cisco CCNA 200-301 Notes - Jeremys IT Lab.pdf>)
-   * [Cisco CCNA 200-301 Official Cert Guide - Volume 1.pdf](<./Networking/Cisco CCNA 200-301 Official Cert Guide - Volume 1.pdf>)
-   * [Cisco CCNA 200-301 Official Cert Guide - Volume 2.pdf](<./Networking/Cisco CCNA 200-301 Official Cert Guide - Volume 2.pdf>)
- * [Programming](<./Programming>)
-     * [C++](<./Programming/C++>)
-       * [A Tour of C++.pdf](<./Programming/C++/A Tour of C++.pdf>)
-       * [Beginning Visual C++ 2013.pdf](<./Programming/C++/Beginning Visual C++ 2013.pdf>)
-       * [C++ 195.pdf](<./Programming/C++/C++ 195.pdf>)
-       * [C++ Today.pdf](<./Programming/C++/C++ Today.pdf>)
-       * [Data Structure and Algorithm Analysis in C++ Fourth Edition.pdf](<./Programming/C++/Data Structure and Algorithm Analysis in C++ Fourth Edition.pdf>)
-       * [Data Structure and Algorithm Analysis in C++ Third Edition.pdf](<./Programming/C++/Data Structure and Algorithm Analysis in C++ Third Edition.pdf>)
-       * [Effective C++ Third Edition.pdf](<./Programming/C++/Effective C++ Third Edition.pdf>)
-       * [Effective Modern C++ 11&14.pdf](<./Programming/C++/Effective Modern C++ 11&14.pdf>)
-     * [GO](<./Programming/GO>)
-       * [Go in Action.pdf](<./Programming/GO/Go in Action.pdf>)
-       * [Go Web Programming.pdf](<./Programming/GO/Go Web Programming.pdf>)
-     * [Java](<./Programming/Java>)
-       * [Effective Java, Third Edition.pdf](<./Programming/Java/Effective Java, Third Edition.pdf>)
-       * [Java 8 In Action.pdf](<./Programming/Java/Java 8 In Action.pdf>)
-       * [Pragmatic Unit Testing in Java 8 with JUnit.pdf](<./Programming/Java/Pragmatic Unit Testing in Java 8 with JUnit.pdf>)
-     * [Kotlin](<./Programming/Kotlin>)
-       * [Kotlin in Action.pdf](<./Programming/Kotlin/Kotlin in Action.pdf>)
-     * [Python](<./Programming/Python>)
-       * [An Introduction to Python.pdf](<./Programming/Python/An Introduction to Python.pdf>)
-       * [Learning Python with Raspberry Pi.pdf](<./Programming/Python/Learning Python with Raspberry Pi.pdf>)
-     * [Ruby](<./Programming/Ruby>)
-         * [Beginning Ruby - From Novice to Professional.pdf](<./Programming/Ruby/Beginning Ruby - From Novice to Professional.pdf>)
-         * [Pragmatic Programming Ruby 1.9 & 2.0 Fourth Edition.pdf](<./Programming/Ruby/Pragmatic Programming Ruby 1.9 & 2.0 Fourth Edition.pdf>)
+
+* [Artificial Intelligence](./Artificial%20Intelligence)
+
+  * [Artificial General Intelligence.pdf](./Artificial%20Intelligence/Artificial%20General%20Intelligence.pdf)
+  * [Artificial Intelligence - A Modern Approach.pdf](./Artificial%20Intelligence/Artificial%20Intelligence%20-%20A%20Modern%20Approach.pdf)
+  * [Artificial Intelligence - A Modern Approach, Second Edition.pdf](./Artificial%20Intelligence/Artificial%20Intelligence%20-%20A%20Modern%20Approach,%20Second%20Edition.pdf)
+  * [Artificial Intelligence - A Modern Approach, Third Edition.pdf](./Artificial%20Intelligence/Artificial%20Intelligence%20-%20A%20Modern%20Approach,%20Third%20Edition.pdf)
+  * [Artificial Intelligence for Games, Second Edition.pdf](./Artificial%20Intelligence/Artificial%20Intelligence%20for%20Games,%20Second%20Edition.pdf)
+  * [Artificial Intelligence - luger, Sixth Edition.pdf](./Artificial%20Intelligence/Artificial%20Intelligence%20-%20luger,%20Sixth%20Edition.pdf)
+  * [Universal Artificial Intelligence.pdf](./Artificial%20Intelligence/Universal%20Artificial%20Intelligence.pdf)
+* [Hardware](./Hardware)
+
+  * [Arduino](./Hardware/Arduino)
+
+    * [Arduino for Dummies.pdf](./Hardware/Arduino/Arduino%20for%20Dummies.pdf)
+    * [Arduino Projects for Dummies.pdf](./Hardware/Arduino/Arduino%20Projects%20for%20Dummies.pdf)
+    * [Arduino Sketches.pdf](./Hardware/Arduino/Arduino%20Sketches.pdf)
+    * [Exploring Arduino.pdf](./Hardware/Arduino/Exploring%20Arduino.pdf)
+    * [Introduction to Arduino.pdf](./Hardware/Arduino/Introduction%20to%20Arduino.pdf)
+  * [BeagleBone for Dummies.pdf](./Hardware/BeagleBone%20for%20Dummies.pdf)
+  * [Complete Electronics Self-teaching Guide with Projects.pdf](./Hardware/Complete%20Electronics%20Self-teaching%20Guide%20with%20Projects.pdf)
+  * [Electronics for Dummies.pdf](./Hardware/Electronics%20for%20Dummies.pdf)
+  * [Exploring BeagleBone.pdf](./Hardware/Exploring%20BeagleBone.pdf)
+  * [Raspberry Pi](./Hardware/Raspberry%20Pi)
+
+    * [Adventures in Raspberry Pi.pdf](./Hardware/Raspberry%20Pi/Adventures%20in%20Raspberry%20Pi.pdf)
+    * [Exploring Raspberry Pi.pdf](./Hardware/Raspberry%20Pi/Exploring%20Raspberry%20Pi.pdf)
+    * [Raspberry Pi Projects for Dummies.pdf](./Hardware/Raspberry%20Pi/Raspberry%20Pi%20Projects%20for%20Dummies.pdf)
+    * [Raspberry Pi Projects.pdf](./Hardware/Raspberry%20Pi/Raspberry%20Pi%20Projects.pdf)
+    * [Raspberry Pi User Guide.pdf](./Hardware/Raspberry%20Pi/Raspberry%20Pi%20User%20Guide.pdf)
+* [Networking](./Networking)
+
+  * [Cisco CCNA 200-301 Notes - Jeremys IT Lab.pdf](./Networking/Cisco%20CCNA%20200-301%20Notes%20-%20Jeremys%20IT%20Lab.pdf)
+  * [Cisco CCNA 200-301 Official Cert Guide - Volume 1.pdf](./Networking/Cisco%20CCNA%20200-301%20Official%20Cert%20Guide%20-%20Volume%201.pdf)
+  * [Cisco CCNA 200-301 Official Cert Guide - Volume 2.pdf](./Networking/Cisco%20CCNA%20200-301%20Official%20Cert%20Guide%20-%20Volume%202.pdf)
+* [Programming](./Programming)
+
+  * [C++](./Programming/C++)
+
+    * [A Tour of C++.pdf](./Programming/C++/A%20Tour%20of%20C++.pdf)
+    * [Beginning Visual C++ 2013.pdf](./Programming/C++/Beginning%20Visual%20C++%202013.pdf)
+    * [C++ 195.pdf](./Programming/C++/C++%20195.pdf)
+    * [C++ Today.pdf](./Programming/C++/C++%20Today.pdf)
+    * [Data Structure and Algorithm Analysis in C++, Fourth Edition.pdf](./Programming/C++/Data%20Structure%20and%20Algorithm%20Analysis%20in%20C++,%20Fourth%20Edition.pdf)
+    * [Data Structure and Algorithm Analysis in C++, Third Edition.pdf](./Programming/C++/Data%20Structure%20and%20Algorithm%20Analysis%20in%20C++,%20Third%20Edition.pdf)
+    * [Effective C++ Third Edition.pdf](./Programming/C++/Effective%20C++%20Third%20Edition.pdf)
+    * [Effective Modern C++ 11\&14.pdf](./Programming/C++/Effective%20Modern%20C++%2011&14.pdf)
+  * [GO](./Programming/GO)
+
+    * [Go in Action.pdf](./Programming/GO/Go%20in%20Action.pdf)
+    * [Go Web Programming.pdf](./Programming/GO/Go%20Web%20Programming.pdf)
+  * [Java](./Programming/Java)
+
+    * [Effective Java, Third Edition.pdf](./Programming/Java/Effective%20Java,%20Third%20Edition.pdf)
+    * [Java 8 In Action.pdf](./Programming/Java/Java%208%20In%20Action.pdf)
+    * [Pragmatic Unit Testing in Java 8 with JUnit.pdf](./Programming/Java/Pragmatic%20Unit%20Testing%20in%20Java%208%20with%20JUnit.pdf)
+  * [Kotlin](./Programming/Kotlin)
+
+    * [Kotlin in Action.pdf](./Programming/Kotlin/Kotlin%20in%20Action.pdf)
+  * [Python](./Programming/Python)
+
+    * [An Introduction to Python.pdf](./Programming/Python/An%20Introduction%20to%20Python.pdf)
+    * [Learning Python with Raspberry Pi.pdf](./Programming/Python/Learning%20Python%20with%20Raspberry%20Pi.pdf)
+  * [Ruby](./Programming/Ruby)
+
+    * [Beginning Ruby - From Novice to Professional.pdf](./Programming/Ruby/Beginning%20Ruby%20-%20From%20Novice%20to%20Professional.pdf)
+    * [Pragmatic Programming Ruby 1.9 \& 2.0 Fourth Edition.pdf](./Programming/Ruby/Pragmatic%20Programming%20Ruby%201.9%20&%202.0%20Fourth%20Edition.pdf)
+
