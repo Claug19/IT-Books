@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+set -u
+
+
+# Compress PDFs larger than this many MB.
+THRESHOLD_MB=40
+THRESHOLD_BYTES=$((THRESHOLD_MB * 1024 * 1024))
+
+find_gs() {
+  if command -v gs >/dev/null 2>&1; then
+    echo "gs"
+    return 0
+  fi
+
+  if command -v gswin64c >/dev/null 2>&1; then
+    echo "gswin64c"
+    return 0
+  fi
+
+  if command -v gswin32c >/dev/null 2>&1; then
+    echo "gswin32c"
+    return 0
+  fi
+
+  return 1
+}
+
+GS_CMD="$(find_gs)"
+if [ -z "${GS_CMD:-}" ]; then
+  echo "Ghostscript was not found (gs/gswin64c/gswin32c)."
+  echo "Installing Ghostscript first, then run this script again."
+  sudo apt-get install -y ghostscript
+fi
+
+# Walk all PDFs under the current directory.
+find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
+  size_bytes=$(wc -c < "$pdf")
+
+  if [ "$size_bytes" -le "$THRESHOLD_BYTES" ]; then
+    continue
+  fi
+
+  tmp_out="${pdf}.compressed.tmp.pdf"
+  echo "Trying: $pdf"
+
+  "$GS_CMD" \
+    -sDEVICE=pdfwrite \
+    -dCompatibilityLevel=1.4 \
+    -dPDFSETTINGS=/ebook \
+    -dNOPAUSE \
+    -dQUIET \
+    -dBATCH \
+    -sOutputFile="$tmp_out" \
+    "$pdf"
+
+  if [ $? -ne 0 ] || [ ! -f "$tmp_out" ]; then
+    echo "  Failed to compress."
+    rm -f "$tmp_out"
+    continue
+  fi
+
+  new_size_bytes=$(wc -c < "$tmp_out")
+
+  if [ "$new_size_bytes" -lt "$size_bytes" ]; then
+    mv "$tmp_out" "$pdf"
+    saved=$((size_bytes - new_size_bytes))
+    echo "  Compressed. Saved ${saved} bytes."
+  else
+    rm -f "$tmp_out"
+    echo "  No gain; kept original."
+  fi
+done
+
+echo "Done."
