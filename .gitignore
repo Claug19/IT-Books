@@ -1,0 +1,10 @@
+# State file tracking already-processed PDFs
+compression_check.txt
+
+# Temporary files produced during compression
+*.compressed.tmp.pdf
+
+# Editor and OS artifacts
+*~
+.DS_Store
+Thumbs.db

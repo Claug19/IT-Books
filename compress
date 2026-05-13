@@ -1,11 +1,86 @@
 #!/usr/bin/env bash
 set -u
 
+CHECKED_FILE="$(dirname "$0")/compression_check.txt"  # Path to the state file that tracks PDFs already processed in previous runs.
+THRESHOLD_MB=1  # Default size threshold in MB; can be overridden by --threshold/-t.
+THRESHOLD_BYTES=0  # Threshold converted to bytes after argument validation.
+DO_CLEAN=0  # When enabled, clears the checked-file list before processing.
+DO_CLEAN_ONLY=0  # When enabled, clears the checked-file list and exits immediately.
+GS_CMD=""  # Resolved Ghostscript executable name/path.
 
-# Compress PDFs larger than this many MB.
-THRESHOLD_MB=40
-THRESHOLD_BYTES=$((THRESHOLD_MB * 1024 * 1024))
+# Print command usage.
+usage() {
+  echo "Usage: $(basename "$0") [--clean|-c] [--cleanonly|-co] [--threshold MB|-t MB|--threshold=MB|-t=MB]"
+}
 
+# Parse supported command-line flags and update runtime settings.
+parse_args() {
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --clean|-c)
+        DO_CLEAN=1
+        shift
+        ;;
+      --cleanonly|-co)
+        DO_CLEAN_ONLY=1
+        shift
+        ;;
+      --threshold|-t)
+        THRESHOLD_MB="${2:?'--threshold requires a value'}"
+        shift 2
+        ;;
+      --threshold=*|-t=*)
+        THRESHOLD_MB="${1#*=}"
+        shift
+        ;;
+      *)
+        echo "Unknown option: $1"
+        usage
+        exit 1
+        ;;
+    esac
+  done
+}
+
+# Clear the check-state file and stop immediately when --cleanonly is passed.
+clean_only_and_exit() {
+  if [ "$DO_CLEAN_ONLY" -eq 1 ]; then
+    > "$CHECKED_FILE"
+    echo "Cleared compression_check.txt."
+    exit 0
+  fi
+}
+
+# Ensure threshold is numeric and compute byte equivalent.
+validate_threshold() {
+  case "$THRESHOLD_MB" in
+    ''|*[!0-9]*)
+      echo "--threshold must be a whole number (MB)."
+      exit 1
+      ;;
+  esac
+  THRESHOLD_BYTES=$((THRESHOLD_MB * 1024 * 1024))
+}
+
+# Clear the check-state file when --clean is passed.
+maybe_clean_checked_file() {
+  if [ "$DO_CLEAN" -eq 1 ]; then
+    > "$CHECKED_FILE"
+    echo "Cleared compression_check.txt."
+  fi
+}
+
+# Append a fully-qualified PDF path to the processed-state file.
+mark_checked() {
+  echo "$1" >> "$CHECKED_FILE"
+}
+
+# Return success if a PDF path already exists in the processed-state file.
+already_checked() {
+  grep -qxF "$1" "$CHECKED_FILE"
+}
+
+# Detect Ghostscript command name across Linux and Windows variants.
 find_gs() {
   if command -v gs >/dev/null 2>&1; then
     echo "gs"
@@ -25,25 +100,47 @@ find_gs() {
   return 1
 }
 
-GS_CMD="$(find_gs)"
-if [ -z "${GS_CMD:-}" ]; then
-  echo "Ghostscript was not found (gs/gswin64c/gswin32c)."
-  echo "Installing Ghostscript first, then run this script again."
-  sudo apt-get install -y ghostscript
-fi
+# Ensure Ghostscript is available; attempt installation if missing.
+ensure_gs() {
+  GS_CMD="$(find_gs || true)"
+  if [ -n "$GS_CMD" ]; then
+    return 0
+  fi
 
-# Walk all PDFs under the current directory.
-find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
+  echo "Ghostscript was not found (gs/gswin64c/gswin32c)."
+  echo "Installing Ghostscript..."
+  if ! sudo apt-get install -y ghostscript; then
+    echo "Failed to install Ghostscript."
+    exit 1
+  fi
+
+  GS_CMD="$(find_gs || true)"
+  if [ -z "$GS_CMD" ]; then
+    echo "Ghostscript is still not available after installation."
+    exit 1
+  fi
+}
+
+# Compress a PDF only when it is above threshold and only keep output if smaller.
+compress_pdf_if_beneficial() {
+  local pdf="$1"
+  local abs_pdf="$2"
+  local size_bytes
+  local tmp_out
+  local new_size_bytes
+  local saved
+
   size_bytes=$(wc -c < "$pdf")
 
   if [ "$size_bytes" -le "$THRESHOLD_BYTES" ]; then
-    continue
+    mark_checked "$abs_pdf"
+    return 0
   fi
 
   tmp_out="${pdf}.compressed.tmp.pdf"
   echo "Trying: $pdf"
 
-  "$GS_CMD" \
+  if ! "$GS_CMD" \
     -sDEVICE=pdfwrite \
     -dCompatibilityLevel=1.4 \
     -dPDFSETTINGS=/ebook \
@@ -51,12 +148,16 @@ find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
     -dQUIET \
     -dBATCH \
     -sOutputFile="$tmp_out" \
-    "$pdf"
-
-  if [ $? -ne 0 ] || [ ! -f "$tmp_out" ]; then
+    "$pdf"; then
     echo "  Failed to compress."
     rm -f "$tmp_out"
-    continue
+    return 0
+  fi
+
+  if [ ! -f "$tmp_out" ]; then
+    echo "  Failed to compress."
+    rm -f "$tmp_out"
+    return 0
   fi
 
   new_size_bytes=$(wc -c < "$tmp_out")
@@ -69,6 +170,27 @@ find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
     rm -f "$tmp_out"
     echo "  No gain; kept original."
   fi
-done
 
+  mark_checked "$abs_pdf"
+}
+
+# Main flow: parse inputs, prepare state, and validate external dependency.
+parse_args "$@"
+clean_only_and_exit
+validate_threshold
+touch "$CHECKED_FILE"
+maybe_clean_checked_file
+ensure_gs
+# Iterate through all PDFs and skip files already processed in prior runs.
+find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
+  # Use absolute paths as stable keys in the check-state file.
+  abs_pdf="$(realpath "$pdf")"
+
+  if already_checked "$abs_pdf"; then
+    echo "Skipping (already checked): $pdf"
+    continue
+  fi
+
+  compress_pdf_if_beneficial "$pdf" "$abs_pdf"
+done
 echo "Done."
