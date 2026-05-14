@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -u
 
-CHECKED_FILE="./compression_check.txt"  # Path to the repository-level state file that tracks PDFs already processed in previous runs.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"  # Absolute directory containing this script.
+BOOKS_DIR="$(cd "$SCRIPT_DIR/../Books" && pwd)"  # Absolute path to the books tree to scan.
+CHECKED_FILE="$SCRIPT_DIR/compression_check.txt"  # Path to the state file that tracks PDFs already processed in previous runs.
 THRESHOLD_MB=1  # Default size threshold in MB; can be overridden by --threshold/-t.
 THRESHOLD_BYTES=0  # Threshold converted to bytes after argument validation.
 DO_CLEAN=0  # When enabled, clears the checked-file list before processing.
@@ -42,12 +44,21 @@ parse_args() {
   done
 }
 
-# Clear the check-state file and stop immediately when --cleanonly is passed.
-clean_only_and_exit() {
+# Clear the check-state file.
+clear_checked_file() {
+  > "$CHECKED_FILE"
+  echo "Cleared compression_check.txt."
+}
+
+# Handle clean flags and stop immediately when --cleanonly is passed.
+handle_clean_flags() {
   if [ "$DO_CLEAN_ONLY" -eq 1 ]; then
-    > "$CHECKED_FILE"
-    echo "Cleared compression_check.txt."
+    clear_checked_file
     exit 0
+  fi
+
+  if [ "$DO_CLEAN" -eq 1 ]; then
+    clear_checked_file
   fi
 }
 
@@ -62,14 +73,6 @@ validate_threshold() {
   THRESHOLD_BYTES=$((THRESHOLD_MB * 1024 * 1024))
 }
 
-# Clear the check-state file when --clean is passed.
-maybe_clean_checked_file() {
-  if [ "$DO_CLEAN" -eq 1 ]; then
-    > "$CHECKED_FILE"
-    echo "Cleared compression_check.txt."
-  fi
-}
-
 # Append a fully-qualified PDF path to the processed-state file.
 mark_checked() {
   echo "$1" >> "$CHECKED_FILE"
@@ -82,20 +85,13 @@ already_checked() {
 
 # Detect Ghostscript command name across Linux and Windows variants.
 find_gs() {
-  if command -v gs >/dev/null 2>&1; then
-    echo "gs"
-    return 0
-  fi
-
-  if command -v gswin64c >/dev/null 2>&1; then
-    echo "gswin64c"
-    return 0
-  fi
-
-  if command -v gswin32c >/dev/null 2>&1; then
-    echo "gswin32c"
-    return 0
-  fi
+  local candidate
+  for candidate in gs gswin64c gswin32c; do
+    if command -v "$candidate" >/dev/null 2>&1; then
+      echo "$candidate"
+      return 0
+    fi
+  done
 
   return 1
 }
@@ -176,13 +172,12 @@ compress_pdf_if_beneficial() {
 
 # Main flow: parse inputs, prepare state, and validate external dependency.
 parse_args "$@"
-clean_only_and_exit
+handle_clean_flags
 validate_threshold
 touch "$CHECKED_FILE"
-maybe_clean_checked_file
 ensure_gs
 # Iterate through all PDFs and skip files already processed in prior runs.
-find ../Books -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
+find "$BOOKS_DIR" -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
   # Use absolute paths as stable keys in the check-state file.
   abs_pdf="$(realpath "$pdf")"
 

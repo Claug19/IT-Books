@@ -1,20 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Change folder to parent folder
-cd ..
+REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+README_FILE="$REPO_ROOT/README.md"
+IGNORED="*~|.git|.github|.gitignore"
+TREE_OUTPUT="$(
+      tree -f --noreport --charset ascii -I "$IGNORED" "$REPO_ROOT/Books" |
+            sed "s|$REPO_ROOT/||g; 1{/^Books$/d;}" |
+            sed 's/`/|/g; s/    |/|   |/g' |
+            sed -e 's/| \+/  /g' -e 's/|-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g'
+)"
 
-ignored_files="*~|README.md|.git|.github|.gitignore"
-tree=$(tree -f --noreport -I '$ignored_files' --charset ascii |
-       sed '1{/^\.$/d;}' |
-       sed 's/`/|/g' |
-       sed 's/    |/|   |/g' |
-       sed -e 's/| \+/  /g' -e 's/|-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g'
-      )
-title="# IT books repository\n\n\n"
-about="### About:\nThis project contains IT books on various topics collected throughout the years.\n\n\n"
-books="### List of books:\n\n\n${tree}"
+cat > "$README_FILE" <<EOF
+# IT books repository
 
-echo -e "${title}${about}${books}" > README.md
+### About:
+This project contains IT books on various topics collected throughout the years.
 
-# Change folder back to Scripts folder
-cd Scripts
+### List of Books:
+$TREE_OUTPUT
+EOF
