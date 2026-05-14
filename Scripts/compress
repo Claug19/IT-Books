@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-CHECKED_FILE="$(dirname "$0")/compression_check.txt"  # Path to the state file that tracks PDFs already processed in previous runs.
+CHECKED_FILE="./compression_check.txt"  # Path to the repository-level state file that tracks PDFs already processed in previous runs.
 THRESHOLD_MB=1  # Default size threshold in MB; can be overridden by --threshold/-t.
 THRESHOLD_BYTES=0  # Threshold converted to bytes after argument validation.
 DO_CLEAN=0  # When enabled, clears the checked-file list before processing.
@@ -182,7 +182,7 @@ touch "$CHECKED_FILE"
 maybe_clean_checked_file
 ensure_gs
 # Iterate through all PDFs and skip files already processed in prior runs.
-find . -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
+find ../Books -type f \( -iname "*.pdf" \) -print0 | while IFS= read -r -d '' pdf; do
   # Use absolute paths as stable keys in the check-state file.
   abs_pdf="$(realpath "$pdf")"
 

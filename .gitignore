@@ -1,5 +1,5 @@
 # State file tracking already-processed PDFs
-compression_check.txt
+Scripts/compression_check.txt
 
 # Temporary files produced during compression
 *.compressed.tmp.pdf

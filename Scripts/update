@@ -1,0 +1,22 @@
+﻿#!/bin/bash
+set -u
+
+echo "Running compress script..."
+./compress
+
+if [ $? -ne 0 ]; then
+  echo "Error: compress script failed."
+  exit 1
+fi
+
+echo ""
+echo "Running generate_md script..."
+./generate_md
+
+if [ $? -ne 0 ]; then
+  echo "Error: generate_md script failed."
+  exit 1
+fi
+
+echo ""
+echo "Update complete!"

@@ -1,13 +1,16 @@
 #!/bin/bash
 
-ignored_files="*~|README.md|generatemd|compress|compression_check.txt|.git|.github|.gitignore"
-tree=$(tree -f --noreport -I "$ignored_files" --charset ascii |
+ignored_files="*~|README.md|.git|.github|.gitignore"
+tree=$(tree -f --noreport -I '$ignored_files' --charset ascii ../Books |
        sed '1{/^\.$/d;}' |
        sed 's/`/|/g' |
        sed 's/    |/|   |/g' |
-       sed -e 's/| \+/  /g' -e 's/|-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g')
+       sed -e 's/| \+/  /g' -e 's/|-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g'
+      )
 title="# IT books repository\n\n\n"
 about="### About:\nThis project contains IT books on various topics collected throughout the years.\n\n\n"
 books="### List of books:\n\n\n${tree}"
 
+cd ..
 echo -e "${title}${about}${books}" > README.md
+cd Scripts
