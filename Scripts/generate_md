@@ -12,6 +12,7 @@ TREE_OUTPUT="$(
 )"
 
 cat > "$README_FILE" <<EOF
+<link rel="stylesheet" href="Assets/bootstrap.css" />
 <div id="readme-top"/>
 <nav>
   <h2>
@@ -21,7 +22,7 @@ cat > "$README_FILE" <<EOF
   </h2>
 </nav>
 
-## IT Books:
+## IT Books
 
 $TREE_OUTPUT
 
