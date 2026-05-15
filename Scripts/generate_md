@@ -5,18 +5,25 @@ REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 README_FILE="$REPO_ROOT/README.md"
 IGNORED="*~|.git|.github|.gitignore"
 TREE_OUTPUT="$(
-      tree -f --noreport --charset ascii -I "$IGNORED" "$REPO_ROOT/Books" |
+      tree -f --dirsfirst --noreport --charset ascii -I "$IGNORED" "$REPO_ROOT/Books" |
             sed "s|$REPO_ROOT/||g; 1{/^Books$/d;}" |
             sed 's/`/|/g; s/    |/|   |/g' |
             sed -e 's/| \+/  /g' -e 's/|-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](<\2>):g'
 )"
 
 cat > "$README_FILE" <<EOF
-# List of IT Books
+<div id="readme-top"/>
+<nav>
+  <h2>
+    <a href="README.md">BOOKS</a>&nbsp;
+    <a href="ABOUT.md">ABOUT</a>&nbsp;
+    <a href="USAGE.md">USAGE</a>
+  </h2>
+</nav>
+
+## IT Books:
 
 $TREE_OUTPUT
 
-
-### About
-For more details on how this project works, read the [about](ABOUT.md) page.  
+<p align="right"><a href="#readme-top">(back to top)</a></p>
 EOF
