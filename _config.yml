@@ -1,22 +1,25 @@
 markdown: kramdown
 optional_front_matter: true
 
+include:
+  - README.md
+
 defaults:
   - scope:
       path: "README.md"
-      type: pages
+      type: "pages"
     values:
-      permalink: /README
+      permalink: /README/
       title: BOOKS
   - scope:
       path: "ABOUT.md"
-      type: pages
+      type: "pages"
     values:
-      permalink: /ABOUT
+      permalink: /ABOUT/
       title: ABOUT
   - scope:
       path: "USAGE.md"
-      type: pages
+      type: "pages"
     values:
-      permalink: /USAGE
+      permalink: /USAGE/
       title: USAGE
