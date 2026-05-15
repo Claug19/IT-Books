@@ -1,0 +1,22 @@
+markdown: kramdown
+optional_front_matter: true
+
+defaults:
+  - scope:
+      path: "README.md"
+      type: pages
+    values:
+      permalink: /README
+      title: BOOKS
+  - scope:
+      path: "ABOUT.md"
+      type: pages
+    values:
+      permalink: /ABOUT
+      title: ABOUT
+  - scope:
+      path: "USAGE.md"
+      type: pages
+    values:
+      permalink: /USAGE
+      title: USAGE

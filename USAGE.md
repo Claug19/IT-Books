@@ -2,9 +2,9 @@
 <div id="readme-top"/>
 <nav>
   <h2>
-    <a href="README">BOOKS</a>&nbsp;
-    <a href="ABOUT">ABOUT</a>&nbsp;
-    <a href="USAGE">USAGE</a>
+    <a href="README.md">BOOKS</a>&nbsp;
+    <a href="ABOUT.md">ABOUT</a>&nbsp;
+    <a href="USAGE.md">USAGE</a>
   </h2>
 </nav>
 
