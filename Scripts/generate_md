@@ -12,11 +12,11 @@ TREE_OUTPUT="$(
 )"
 
 cat > "$README_FILE" <<EOF
-# IT books repository
+# List of IT Books
 
-### About:
-This project contains IT books on various topics collected throughout the years.
-
-### List of Books:
 $TREE_OUTPUT
+
+
+### About
+For more details on how this project works, read the [about](ABOUT.md) page.  
 EOF
