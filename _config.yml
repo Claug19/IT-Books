@@ -10,17 +10,20 @@ defaults:
       path: "README.md"
       type: "pages"
     values:
-      permalink: /README/
+      layout: "page"
+      permalink: /README.md
       title: BOOKS
   - scope:
       path: "ABOUT.md"
       type: "pages"
     values:
-      permalink: /ABOUT/
+      layout: "page"
+      permalink: /ABOUT.md
       title: ABOUT
   - scope:
       path: "USAGE.md"
       type: "pages"
     values:
-      permalink: /USAGE/
+      layout: "page"
+      permalink: /USAGE.md
       title: USAGE
