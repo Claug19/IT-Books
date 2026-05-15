@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Books
-permalink: BOOOKS.md
+permalink: /BOOOKS.md
 ---
 
 - [Databases](Books/Databases)
