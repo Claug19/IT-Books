@@ -1,9 +1,3 @@
----
-title: BOOKS PAGE
-layout: template
-filename: BOOKS.md
----
-
 - [Databases](Books/Databases)
   - [NoSQL Distilled.pdf](<Books/Databases/NoSQL Distilled.pdf>)
   - [SQL and Relational Theory, Third Edition.pdf](<Books/Databases/SQL and Relational Theory, Third Edition.pdf>)

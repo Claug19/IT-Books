@@ -1,5 +1,3 @@
-Go to [books page](BOOKS.md)
-
 # IT books repository
 
 ### About:
