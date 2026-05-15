@@ -1,3 +1,9 @@
+---
+layout: page
+title: About
+permalink: /about/
+---
+
 ### About:
 
 This project contains IT books on various topics collected throughout the years.
