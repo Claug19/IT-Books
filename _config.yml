@@ -1,5 +1,6 @@
 markdown: kramdown
-optional_front_matter: true
+optional_front_matter:
+  enabled: true
 
 include:
   - README.md
