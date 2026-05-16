@@ -15,7 +15,7 @@ title: "Usage"
 
 ## Usage
 
-1. Link to github repository: https://github.com/Claug19/IT-Books
+1. Link to github repository: [https://github.com/Claug19/IT-Books](https://github.com/Claug19/IT-Books)
 
 2. Clone or download the repository
 

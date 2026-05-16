@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SITE_PATH="https://claug19.github.io/IT-Books/"
+# For local testing:
+# SITE_PATH="/"
+
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE_DIR="$REPO_ROOT/Site"
-SITE_PATH="https://claug19.github.io/IT-Books/"
+
 LINK_REWRITES="s|href=\"README.md\"|href=\"${SITE_PATH}\"|g; s|href=\"ABOUT.md\"|href=\"${SITE_PATH}About\"|g; s|href=\"USAGE.md\"|href=\"${SITE_PATH}Usage\"|g"
 
 mkdir -p "$SITE_DIR"
