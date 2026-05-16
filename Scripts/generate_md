@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 README_FILE="$REPO_ROOT/README.md"
-IGNORED="*~|.git|.github|.gitignore"
+IGNORED="*~|.git|.github|.gitignore|index.html"
 TREE_OUTPUT="$(
       tree -f --dirsfirst --noreport --charset ascii -I "$IGNORED" "$REPO_ROOT/Books" |
             sed "s|$REPO_ROOT/||g; 1{/^Books$/d;}" |
