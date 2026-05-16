@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+BOOKS_DIR="$REPO_ROOT/Books"
+BOOTSTRAP_REL_FROM_ROOT="Site/Assets/bootstrap.css"
+
+if [[ ! -d "$BOOKS_DIR" ]]; then
+  echo "Error: Books directory not found at $BOOKS_DIR"
+  exit 1
+fi
+
+# Return path from a folder inside Books back to the repository root.
+path_to_repo_root() {
+  local folder="$1"
+  local relative_from_books
+  local -a segments=()
+  local depth=0
+  local prefix=""
+
+  relative_from_books="${folder#"$BOOKS_DIR"}"
+  relative_from_books="${relative_from_books#/}"
+
+  if [[ -n "$relative_from_books" ]]; then
+    IFS='/' read -r -a segments <<< "$relative_from_books"
+    depth="${#segments[@]}"
+  fi
+
+  for ((i = 0; i < depth + 1; i++)); do
+    prefix+="../"
+  done
+
+  printf '%s' "$prefix"
+}
+
+# Print the folder links section for the current index page.
+write_folders_section() {
+  local folder="$1"
+  local has_folder=0
+
+  printf '  <h2 class="h5">Folders</h2>\n'
+  printf '  <ul class="list-group mb-4">\n'
+
+  while IFS= read -r -d '' subdir; do
+    local dir_name
+    has_folder=1
+    dir_name="$(basename "$subdir")"
+    printf '    <li class="list-group-item"><a href="%s/index.html">%s</a></li>\n' "$dir_name" "$dir_name"
+  done < <(find "$folder" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
+
+  if [[ "$has_folder" -eq 0 ]]; then
+    printf '    <li class="list-group-item">No folders in this folder.</li>\n'
+  fi
+
+  printf '  </ul>\n'
+}
+
+# Print the PDF links section for the current index page.
+write_books_section() {
+  local folder="$1"
+  local has_book=0
+
+  printf '  <h2 class="h5">Books</h2>\n'
+  printf '  <ul class="list-group">\n'
+
+  while IFS= read -r -d '' pdf; do
+    local file_name
+    has_book=1
+    file_name="$(basename "$pdf")"
+    printf '    <li class="list-group-item"><a href="%s">%s</a></li>\n' "$file_name" "$file_name"
+  done < <(find "$folder" -maxdepth 1 -type f \( -iname '*.pdf' \) -print0 | sort -z)
+
+  if [[ "$has_book" -eq 0 ]]; then
+    printf '    <li class="list-group-item">No books in this folder.</li>\n'
+  fi
+
+  printf '  </ul>\n'
+}
+
+generate_index_for_folder() {
+  local folder="$1"
+  local rel_from_root
+  local folder_title
+  local repo_prefix
+  local bootstrap_href
+  local back_href
+  local output_file
+
+  rel_from_root="${folder#"$REPO_ROOT"/}"
+  folder_title="$rel_from_root"
+  repo_prefix="$(path_to_repo_root "$folder")"
+  bootstrap_href="${repo_prefix}${BOOTSTRAP_REL_FROM_ROOT}"
+  output_file="$folder/index.html"
+
+  # Books root goes back to repository README; nested folders go one level up.
+  if [[ "$folder" == "$BOOKS_DIR" ]]; then
+    back_href="${repo_prefix}README.md"
+  else
+    back_href="../index.html"
+  fi
+
+  {
+    printf '<!doctype html>\n'
+    printf '<html lang="en">\n'
+    printf '<head>\n'
+    printf '  <meta charset="utf-8">\n'
+    printf '  <meta name="viewport" content="width=device-width, initial-scale=1">\n'
+    printf '  <title>%s</title>\n' "$folder_title"
+    printf '  <link rel="stylesheet" href="%s">\n' "$bootstrap_href"
+    printf '</head>\n'
+    printf '<body class="container py-4">\n'
+    printf '  <a class="btn btn-outline-secondary mb-3" href="%s">Back</a>\n' "$back_href"
+    printf '  <h1 class="mb-4">%s</h1>\n' "$folder_title"
+    write_folders_section "$folder"
+    write_books_section "$folder"
+    printf '</body>\n'
+    printf '</html>\n'
+  } > "$output_file"
+
+  printf 'Generated %s\n' "$output_file"
+}
+
+while IFS= read -r -d '' dir; do
+  generate_index_for_folder "$dir"
+done < <(find "$BOOKS_DIR" -type d -print0 | sort -z)
+
+echo "Done generating index.html files under Books."

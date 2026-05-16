@@ -2,13 +2,41 @@
 set -euo pipefail
 
 SITE_PATH="https://claug19.github.io/IT-Books/"
-# For local testing:
-# SITE_PATH="/"
+LOCAL_SITE_PATH="/"
+BASE_PATH="$SITE_PATH"
 
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE_DIR="$REPO_ROOT/Site"
 
-LINK_REWRITES="s|href=\"README.md\"|href=\"${SITE_PATH}\"|g; s|href=\"ABOUT.md\"|href=\"${SITE_PATH}About\"|g; s|href=\"USAGE.md\"|href=\"${SITE_PATH}Usage\"|g"
+usage() {
+  cat <<'EOF'
+Usage: generate_site_pages [--local]
+
+Options:
+  --local   Use local site links (/...) instead of production site links.
+  -h, --help  Show this help message.
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --local)
+      BASE_PATH="$LOCAL_SITE_PATH"
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Error: Unknown option '$1'"
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+LINK_REWRITES="s|href=\"README.md\"|href=\"${BASE_PATH}\"|g; s|href=\"ABOUT.md\"|href=\"${BASE_PATH}About\"|g; s|href=\"USAGE.md\"|href=\"${BASE_PATH}Usage\"|g"
 
 mkdir -p "$SITE_DIR"
 

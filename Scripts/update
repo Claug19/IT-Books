@@ -18,4 +18,5 @@ run_step() {
 run_step compress
 run_step generate_md
 run_step generate_site_pages
+run_step generate_book_indexes
 printf "\n${GREEN}Update complete!${RESET}\n"
