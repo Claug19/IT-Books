@@ -91,14 +91,7 @@ generate_index_for_folder() {
   repo_prefix="$(path_to_repo_root "$folder")"
   bootstrap_href="${repo_prefix}${BOOTSTRAP_REL_FROM_ROOT}"
   output_file="$folder/index.html"
-
-  # Books root goes back to repository README; nested folders go one level up.
-  if [[ "$folder" == "$BOOKS_DIR" ]]; then
-    back_href="${repo_prefix}README.md"
-  else
-    back_href="../index.html"
-  fi
-
+  back_href="../index.html"
   {
     printf '<!doctype html>\n'
     printf '<html lang="en">\n'
@@ -109,7 +102,7 @@ generate_index_for_folder() {
     printf '  <link rel="stylesheet" href="%s">\n' "$bootstrap_href"
     printf '</head>\n'
     printf '<body class="container py-4">\n'
-    printf '  <a class="btn btn-outline-secondary mb-3" href="%s">Back</a>\n' "$back_href"
+    printf '  <a class="btn btn-outline-primary mb-3" href="%s">Back</a>\n' "$back_href"
     printf '  <h1 class="mb-4">%s</h1>\n' "$folder_title"
     write_folders_section "$folder"
     write_books_section "$folder"
