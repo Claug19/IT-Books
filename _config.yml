@@ -11,19 +11,16 @@ defaults:
       type: "pages"
     values:
       layout: "page"
-      permalink: /README.md
       title: BOOKS
   - scope:
       path: "ABOUT.md"
       type: "pages"
     values:
       layout: "page"
-      permalink: /ABOUT.md
       title: ABOUT
   - scope:
       path: "USAGE.md"
       type: "pages"
     values:
       layout: "page"
-      permalink: /USAGE.md
       title: USAGE
