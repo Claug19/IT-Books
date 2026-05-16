@@ -2,16 +2,11 @@
 <div id="readme-top"/>
 <nav>
   <h2>
-    <a href="README.md" data-jekyll-path="/">BOOKS</a>&nbsp;
-    <a href="ABOUT.md" data-jekyll-path="/about/">ABOUT</a>&nbsp;
-    <a href="USAGE.md" data-jekyll-path="/usage/">USAGE</a>
+    <a href="README.md">BOOKS</a>&nbsp;
+    <a href="ABOUT.md">ABOUT</a>&nbsp;
+    <a href="USAGE.md">USAGE</a>
   </h2>
 </nav>
-<script>
-  document.querySelectorAll("a[data-jekyll-path]").forEach(function (link) {
-    link.href = link.dataset.jekyllPath;
-  });
-</script>
 
 ## Usage
 

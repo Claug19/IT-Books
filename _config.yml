@@ -5,20 +5,22 @@ optional_front_matter:
 
 include:
   - README.md
+  - ABOUT.md
+  - USAGE.md
 
 defaults:
   - scope:
       path: "README.md"
       type: "pages"
     values:
-      permalink: /
+      permalink: /README.md
   - scope:
       path: "ABOUT.md"
       type: "pages"
     values:
-      permalink: /about/
+      permalink: /ABOUT.md
   - scope:
       path: "USAGE.md"
       type: "pages"
     values:
-      permalink: /usage/
+      permalink: /USAGE.md
