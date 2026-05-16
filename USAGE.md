@@ -24,7 +24,6 @@
      `-t` flag specifies the treshold under wich files are not checked for compression
      `--clean` flag deletes the list of files that were already checked then compresses all the files again.
      `--cleanonly` flag only deletes the list of files that were already checked.
-
    - 2.2 You can run generate_md only to update the list of books.
    - 2.3 You can ran generate_site_pages only to update the site structure in Jekyll.
    - 2.4 You can update the folder indexes with generate_book_indexes.
