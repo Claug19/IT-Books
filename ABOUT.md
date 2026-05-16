@@ -34,4 +34,4 @@ Please do share this repository only with trusted readers.
   - Testing
   - Web Development
 
-<p align="right"><a href="#readme-top">(back to top)</a></p>---
+<p align="right"><a href="#readme-top">(back to top)</a></p>

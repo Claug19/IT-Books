@@ -8,8 +8,8 @@ title: "About"
 <nav>
   <h2>
     <a href="/">BOOKS</a>&nbsp;
-    <a href="/About">ABOUT</a>&nbsp;
-    <a href="/Usage">USAGE</a>
+    <a href="About">ABOUT</a>&nbsp;
+    <a href="Usage">USAGE</a>
   </h2>
 </nav>
 
@@ -39,4 +39,4 @@ Please do share this repository only with trusted readers.
   - Testing
   - Web Development
 
-<p align="right"><a href="#readme-top">(back to top)</a></p>---
+<p align="right"><a href="#readme-top">(back to top)</a></p>

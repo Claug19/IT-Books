@@ -32,4 +32,4 @@ Then open the local URL that Jekyll prints, usually `http://127.0.0.1:4000/`.
 
    - 2.2 You can run generate_md only to update the list of books.
 
-<p align="right"><a href="#readme-top">(back to top)</a></p>---
+<p align="right"><a href="#readme-top">(back to top)</a></p>

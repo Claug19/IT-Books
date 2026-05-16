@@ -8,8 +8,8 @@ title: "IT-Books"
 <nav>
   <h2>
     <a href="/">BOOKS</a>&nbsp;
-    <a href="/About">ABOUT</a>&nbsp;
-    <a href="/Usage">USAGE</a>
+    <a href="About">ABOUT</a>&nbsp;
+    <a href="Usage">USAGE</a>
   </h2>
 </nav>
 

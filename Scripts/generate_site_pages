@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE_DIR="$REPO_ROOT/Site"
-LINK_REWRITES='s|href="README.md"|href="/"|g; s|href="ABOUT.md"|href="/About"|g; s|href="USAGE.md"|href="/Usage"|g'
+LINK_REWRITES='s|href="README.md"|href="/"|g; s|href="ABOUT.md"|href="About"|g; s|href="USAGE.md"|href="Usage"|g'
 
 mkdir -p "$SITE_DIR"
 
