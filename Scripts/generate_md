@@ -12,7 +12,7 @@ TREE_OUTPUT="$(
 )"
 
 cat > "$README_FILE" <<EOF
-<link rel="stylesheet" href="Assets/bootstrap.css" />
+<link rel="stylesheet" href="Site/Assets/bootstrap.css" />
 <div id="readme-top"/>
 <nav>
   <h2>

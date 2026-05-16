@@ -4,7 +4,18 @@ Scripts/compression_check.txt
 # Temporary files produced during compression
 *.compressed.tmp.pdf
 
+# Jekyll and Bundler artifacts
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+vendor/bundle/
+
 # Editor and OS artifacts
 *~
 .DS_Store
 Thumbs.db
+
+# gemfiles
+Gemfile.lock
+Gemfile

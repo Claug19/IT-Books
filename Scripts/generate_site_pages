@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+SITE_DIR="$REPO_ROOT/Site"
+LINK_REWRITES='s|href="README.md"|href="/"|g; s|href="ABOUT.md"|href="/About"|g; s|href="USAGE.md"|href="/Usage"|g'
+
+mkdir -p "$SITE_DIR"
+
+# Remove an existing front matter block so we can write a clean one per generated copy.
+strip_front_matter() {
+  local source_file="$1"
+
+  awk '
+    NR == 1 && $0 == "---" { in_fm = 1; next }
+    in_fm && $0 == "---" { in_fm = 0; next }
+    in_fm { next }
+    { print }
+  ' "$source_file"
+}
+
+generate_page_copy() {
+  local source_file="$1"
+  local output_file="$2"
+  local permalink="$3"
+  local title="$4"
+
+  {
+    printf -- "---\n"
+    printf 'permalink: %s\n' "$permalink"
+    printf 'title: "%s"\n' "$title"
+    printf -- "---\n\n"
+
+    strip_front_matter "$source_file" |
+      sed "$LINK_REWRITES"
+  } > "$output_file"
+}
+
+# Generate each rendered page copy with the target permalink and display title.
+while IFS='|' read -r source target permalink title; do
+  generate_page_copy "$REPO_ROOT/$source" "$SITE_DIR/$target" "$permalink" "$title"
+done <<'EOF'
+README.md|index.md|/|IT-Books
+ABOUT.md|about.md|/About|About
+USAGE.md|usage.md|/Usage|Usage
+EOF
+
+printf 'Generated site page copies in %s\n' "$SITE_DIR"

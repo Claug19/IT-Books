@@ -1,10 +1,15 @@
+---
+permalink: /
+title: "IT-Books"
+---
+
 <link rel="stylesheet" href="Site/Assets/bootstrap.css" />
 <div id="readme-top"/>
 <nav>
   <h2>
-    <a href="README.md">BOOKS</a>&nbsp;
-    <a href="ABOUT.md">ABOUT</a>&nbsp;
-    <a href="USAGE.md">USAGE</a>
+    <a href="/">BOOKS</a>&nbsp;
+    <a href="/About">ABOUT</a>&nbsp;
+    <a href="/Usage">USAGE</a>
   </h2>
 </nav>
 

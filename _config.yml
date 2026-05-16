@@ -1,26 +1,7 @@
 markdown: kramdown
-
-optional_front_matter:
-  enabled: true
-
-include:
+title: IT-Books
+exclude:
+  - Scripts
   - README.md
   - ABOUT.md
   - USAGE.md
-
-defaults:
-  - scope:
-      path: "README.md"
-      type: "pages"
-    values:
-      permalink: /README.md
-  - scope:
-      path: "ABOUT.md"
-      type: "pages"
-    values:
-      permalink: /ABOUT.md
-  - scope:
-      path: "USAGE.md"
-      type: "pages"
-    values:
-      permalink: /USAGE.md
