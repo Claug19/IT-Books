@@ -1,13 +1,13 @@
 ---
-permalink: /IT-Books
-title: "IT-Books"
+permalink: /
+title: ""
 ---
 
 <link rel="stylesheet" href="Site/Assets/bootstrap.css" />
 <div id="readme-top"/>
 <nav>
   <h2>
-    <a href="IT-Books">BOOKS</a>&nbsp;
+    <a href="/">BOOKS</a>&nbsp;
     <a href="About">ABOUT</a>&nbsp;
     <a href="Usage">USAGE</a>
   </h2>
