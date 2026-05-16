@@ -7,9 +7,9 @@ title: "Usage"
 <div id="readme-top"/>
 <nav>
   <h2>
-    <a href="/">BOOKS</a>&nbsp;
-    <a href="About">ABOUT</a>&nbsp;
-    <a href="Usage">USAGE</a>
+    <a href="https://claug19.github.io/IT-Books/">BOOKS</a>&nbsp;
+    <a href="https://claug19.github.io/IT-Books/About">ABOUT</a>&nbsp;
+    <a href="https://claug19.github.io/IT-Books/Usage">USAGE</a>
   </h2>
 </nav>
 

@@ -3,7 +3,8 @@ set -euo pipefail
 
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE_DIR="$REPO_ROOT/Site"
-LINK_REWRITES='s|href="README.md"|href="/"|g; s|href="ABOUT.md"|href="About"|g; s|href="USAGE.md"|href="Usage"|g'
+SITE_PATH="https://claug19.github.io/IT-Books/"
+LINK_REWRITES="s|href=\"README.md\"|href=\"${SITE_PATH}\"|g; s|href=\"ABOUT.md\"|href=\"${SITE_PATH}About\"|g; s|href=\"USAGE.md\"|href=\"${SITE_PATH}Usage\"|g"
 
 mkdir -p "$SITE_DIR"
 
@@ -40,7 +41,7 @@ generate_page_copy() {
 while IFS='|' read -r source target permalink title; do
   generate_page_copy "$REPO_ROOT/$source" "$SITE_DIR/$target" "$permalink" "$title"
 done <<'EOF'
-README.md|index.md|/|
+README.md|index.md|/|It-Books
 ABOUT.md|about.md|/About|About
 USAGE.md|usage.md|/Usage|Usage
 EOF
